@@ -17,7 +17,7 @@ python Model_train.py --channel 256 --lr 0.00001 --batchsize 256 --encoder encod
 
 ### 方案说明
 
-当前方案主要参考基于深度学习的无线通信与基于深度学习的图片压缩相关方法，使用gdn模块结合nonlocal residual attention，multi scale等网络结构做深度编码。
+当前方案主要参考基于深度学习的无线通信与基于深度学习的图片压缩相关方法，使用gdn模块结合nonlocal residual attention，multi scale等网络结构做深度编码。结合比赛的应用场景，对视频编码中的部分模块进行更改，去除熵编码部分内容，量化部分采用官方提供的量化方法，结合mse loss函数进行端到端训练。
 
 
 
