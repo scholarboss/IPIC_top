@@ -20,9 +20,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--lr', type=float, default=1.0e-03, help='learning rate')
 parser.add_argument('--encoder', type=str, default='none', help='encoder checkpoint')
 parser.add_argument('--decoder', type=str, default='none', help='decoder checkpoint')
-parser.add_argument('--decay', type=int, default=3000, help='learning rate decay')
-parser.add_argument('--start', type=int, default=0, help='start epoch')
-parser.add_argument('--end', type=int, default=3000, help='end epoch')
+parser.add_argument('--decay', type=int, default=20, help='learning rate decay')
+parser.add_argument('--start', type=int, default=1, help='start epoch')
+parser.add_argument('--end', type=int, default=60, help='end epoch')
 parser.add_argument('--channel', type=int, default=64, help='model internal channel')
 parser.add_argument('--batchsize', type=int, default=64, help='training batch size')
 parser.add_argument('--tag', type=str, default='', help='tag on checkpoint')
@@ -95,7 +95,7 @@ test_dataset = DatasetFolder(x_test)
 test_loader = torch.utils.data.DataLoader(
     test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=True)
 best_loss = 999999999999
-for epoch in range(args.start, args.end):
+for epoch in range(args.start, args.end+1):
     # model training
     model.train()
     if epoch % args.decay == 0:
@@ -146,6 +146,8 @@ for epoch in range(args.start, args.end):
         if nmse < best_loss:
             # model save
             # save encoder
+            if not os.path.exists('./Modelsave'):
+                os.mkdir('./Modelsave')
             modelSave1 = './Modelsave/encoder_{}{}.pth.tar'.format(args.channel, args.tag)
             torch.save({'state_dict': model.encoder.state_dict(), }, modelSave1)
             # save decoder
