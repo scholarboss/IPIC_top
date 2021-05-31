@@ -1,0 +1,22 @@
+# 过拟合数据，不能参考
+pilot 8,model 2: 0.667831
+
+pilot 8,model 5: 0.7201115
+
+
+
+# 正常数据
+pilot 8, model 6: 0.6239
+       , model 8: 0.71
+
+pilot 8, model 9 (attention - res 1): 0.7104
+
+
+
+
+
+
+
+pilot 32:
+
+model 8, res_num 2: 0.7107

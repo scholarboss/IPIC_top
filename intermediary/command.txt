@@ -1,0 +1,21 @@
+CUDA_VISIBLE_DEVICES=0 python train.py --start 450 --lr 0.001 --decay 500 --pilot 8 --batchsize 512 --tag model6 --optim Adam --loss 1 --model 6
+
+
+## pilot 8 , model 6
+CUDA_VISIBLE_DEVICES=1 python train.py --start 458 --lr 0.001 --decay 500 --pilot 8 --repeat_begin 0 --repeat_end 3 --batchsize 256 --tag res_deep --optim Adam --loss 1 --model 6 --ckp model_pilot8_res_deep-ckp
+
+
+## pilot 32 , model 6
+CUDA_VISIBLE_DEVICES=0 python train.py --start 400 --lr 0.001 --decay 500 --pilot 32 --repeat_begin 0 --repeat_end 15 --batchsize 256 --tag res_deep --optim Adam --loss 1 --model 6
+
+
+CUDA_VISIBLE_DEVICES=0 python train.py --start 500 --lr 0.001 --decay 800 --pilot 32 --repeat_begin 0 --repeat_end 15 --batchsize 256 --tag model8-multi-res --bn False --optim Adam --loss 1 --model 8 --embed 4096 --num_res 2 --ckp model_pilot8_model8-multi-res
+
+
+
+### test
+python train_copy.py --end 1 --pilot 8 --batchsize 32 --tag test --model 10 --num_res 3 --embed 5120 --ckp model_pilot8_M10Res3Em5120
+
+
+model_pilot8_M10Res3Em5120
+
